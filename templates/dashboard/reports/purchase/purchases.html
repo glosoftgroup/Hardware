@@ -154,6 +154,9 @@
 <script type="text/javascript" src="{% static 'backend/js/plugins/forms/selects/bootstrap_select.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'backend/js/plugins/ui/chart.js/utils.js' %}"></script>
 <script type="text/javascript" src="{% static 'backend/js/plugins/ui/html2canvas.js' %}"></script>
+<script > var back_path = "{{request.path}}";</script>
+<script type="text/javascript" src="{% static 'backend/js/pdf/open-pdf.js' %}"></script>
+
 <script type="text/javascript">
 $(document).ready(function(){
 
@@ -250,19 +253,19 @@ $(document).ready(function(){
           var url = "{% url 'dashboard:reports_purchase_pdf' %}";
           if(searchData && date){
               $.get(url, {q:searchData, gid:date}, function(data){
-                   window.open("data:application/pdf," + escape(data));
+                   openPdf(data);
               });
           }else if(searchData){
               $.get(url, {q:searchData}, function(data){
-                   window.open("data:application/pdf," + escape(data));
+                   openPdf(data);
               });
           }else if(date){
               $.get(url, {gid:date}, function(data){
-                   window.open("data:application/pdf," + escape(data));
+                   openPdf(data);
               });
           }else{
               $.get(url, function(data){
-                   window.open("data:application/pdf," + escape(data));
+                   openPdf(data);
               });
           }
 

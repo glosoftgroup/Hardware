@@ -157,6 +157,9 @@
 <script type="text/javascript" src="{% static 'backend/js/pages/form_multiselect.js' %}"></script>
 <script type="text/javascript" src="{% static 'backend/js/plugins/forms/selects/bootstrap_select.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'backend/js/plugins/pagination/jquery.bootpag.js' %}"></script>
+<script > var back_path = "{{request.path}}";</script>
+<script type="text/javascript" src="{% static 'backend/js/pdf/open-pdf.js' %}"></script>
+
 <script type="text/javascript">
 $(document).ready(function(){
 
@@ -264,29 +267,29 @@ $(document).ready(function(){
         if(ts == 'pdf'){
                 if(searchData && (prolist == 'list')){
                     $.get(url, {q:searchData}, function(data){
-                              window.open("data:application/pdf," + escape(data));
+                              openPdf(data);
                     });
                 }else if(searchData && (prolist == 'reorder')){
                     $.get(url2, {q:searchData}, function(data){
-                              window.open("data:application/pdf," + escape(data));
+                              openPdf(data);
                     });
 
                 }else if(searchData){
                     $.get(url, {q:searchData}, function(data){
-                              window.open("data:application/pdf," + escape(data));
+                              openPdf(data);
                     });
 
                 }else if(prolist == 'list'){
                     $.get(url, function(data){
-                              window.open("data:application/pdf," + escape(data));
+                              openPdf(data);
                     });
                 }else if(prolist == 'reorder'){
                     $.get(url2, function(data){
-                              window.open("data:application/pdf," + escape(data));
+                              openPdf(data);
                     });
                 }else{
                     $.get(url, function(data){
-                              window.open("data:application/pdf," + escape(data));
+                              openPdf(data);
                     });
                 }
 

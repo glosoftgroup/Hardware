@@ -194,6 +194,9 @@
 <script type="text/javascript" src="{% static 'backend/js/plugins/ui/Highcharts-5.0.14/code/modules/exporting.js' %}"></script>
 <script type="text/javascript" src="{% static 'backend/js/plugins/ui/Highcharts-5.0.14/code/modules/drilldown.js' %}"></script>
 <script type="text/javascript" src="{% static 'backend/js/plugins/ui/dom-to-image-master/dom-to-image.min.js' %}"></script>
+<script > var back_path = "{{request.path}}";</script>
+<script type="text/javascript" src="{% static 'backend/js/pdf/open-pdf.js' %}"></script>
+
 <script type="text/javascript">
 $(document).ready(function(){
 
@@ -400,19 +403,19 @@ $(document).ready(function(){
 
             if (searchData && date ){
                 $.get(url, {q:searchData, gid:date, order:scategory}, function(data){
-                          window.open("data:application/pdf," + escape(data));
+                          openPdf(data);
                 });
             }else if (searchData){
                 $.get(url, {q:searchData, order:scategory}, function(data){
-                          window.open("data:application/pdf," + escape(data));
+                          openPdf(data);
                 });
             }else if (date){
                 $.get(url, {gid:date, order:scategory}, function(data){
-                          window.open("data:application/pdf," + escape(data));
+                          openPdf(data);
                 });
             }else{
                 $.get(url, {order:scategory},function(data){
-                          window.open("data:application/pdf," + escape(data));
+                          openPdf(data);
                });
             }
 

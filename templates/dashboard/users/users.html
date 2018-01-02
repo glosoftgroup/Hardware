@@ -265,6 +265,9 @@
   <script type="text/javascript" src="{% static 'backend/js/plugins/forms/selects/bootstrap_multiselect.js' %}"></script> 
   <script type="text/javascript" src="{% static 'backend/js/pages/form_multiselect.js' %}"></script>
 <script type="text/javascript" src="{% static 'backend/js/plugins/forms/selects/bootstrap_select.min.js' %}"></script>
+<script > var back_path = "{{request.path}}";</script>
+<script type="text/javascript" src="{% static 'backend/js/pdf/open-pdf.js' %}"></script>
+
 <script type="text/javascript">
   $(document).ready(function() {
 
@@ -285,19 +288,19 @@
 
             if (searchData && (groupSizeVal && (groupSizeVal != 'all' && groupSizeVal !='none')) ){
                 $.get(url, {q:searchData, gid:groupSizeVal}, function(data){
-                          window.open("data:application/pdf," + escape(data));
+                          openPdf(data);
                 });
             }else if ((groupSizeVal && (groupSizeVal != 'all' && groupSizeVal !='none'))){
                 $.get(url, {gid:groupSizeVal}, function(data){
-                          window.open("data:application/pdf," + escape(data));
+                          openPdf(data);
                 });
             }else if (searchData){
                 $.get(url, {q:searchData}, function(data){
-                          window.open("data:application/pdf," + escape(data));
+                          openPdf(data);
                 });
             }else{
                 $.get(url, function(data){
-                          window.open("data:application/pdf," + escape(data));
+                          openPdf(data);
                });
             }
 

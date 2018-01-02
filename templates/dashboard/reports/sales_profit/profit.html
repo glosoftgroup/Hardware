@@ -225,6 +225,9 @@
 <script type="text/javascript" src="{% static 'backend/js/plugins/forms/selects/bootstrap_select.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'backend/js/plugins/pickers/bootstrap_datepicker/js/bootstrap-datepicker.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'backend/js/plugins/ui/dom-to-image-master/dom-to-image.min.js' %}"></script>
+<script > var back_path = "{{request.path}}";</script>
+<script type="text/javascript" src="{% static 'backend/js/pdf/open-pdf.js' %}"></script>
+
 <script type="text/javascript">
 var grossUrl = "{% url 'dashboard:sales_profit' %}";
 
@@ -279,11 +282,11 @@ $('.rangeBtn').on('click', function(){
                         var y = $('.hidden-year').val();
                         if(m && y){
                             $.get(grossUrl,{ajax:'ajax',month:m, year:y, period:period, pdf:'pdf'}, function(data){
-                               window.open("data:application/pdf," + escape(data));
+                               openPdf(data);
                             });
                         }else{
                             $.get(grossUrl,{pdf:'pdf'}, function(data){
-                                window.open("data:application/pdf," + escape(data));
+                                openPdf(data);
                             });
                         }
 

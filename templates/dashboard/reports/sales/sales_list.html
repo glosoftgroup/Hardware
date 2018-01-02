@@ -212,6 +212,9 @@
 <script type="text/javascript" src="{% static 'backend/js/plugins/ui/Highcharts-5.0.14/code/modules/exporting.js' %}"></script>
 <script type="text/javascript" src="{% static 'backend/js/plugins/ui/Highcharts-5.0.14/code/modules/drilldown.js' %}"></script>
 <script type="text/javascript" src="{% static 'backend/js/plugins/ui/dom-to-image-master/dom-to-image.min.js' %}"></script>
+<script > var back_path = "{{request.path}}";</script>
+<script type="text/javascript" src="{% static 'backend/js/pdf/open-pdf.js' %}"></script>
+
 <script type="text/javascript">
 $(document).ready(function(){
 
@@ -451,7 +454,7 @@ $(document).ready(function(){
                         var img = new Image();
                         img.src = dataUrl;
                         $.get("{% url 'dashboard:reports_sales_category_pdf' %}",{image:dataUrl, date:date}, function(data){
-                                  window.open("data:application/pdf," + escape(data));
+                             openPdf(data);
                        });
                     })
                     .catch(function (error) {
@@ -464,7 +467,7 @@ $(document).ready(function(){
                         var img = new Image();
                         img.src = dataUrl;
                         $.get("{% url 'dashboard:reports_sales_category_pdf' %}",{image:dataUrl}, function(data){
-                                  window.open("data:application/pdf," + escape(data));
+                              openPdf(data);
                        });
                     })
                     .catch(function (error) {
@@ -477,7 +480,7 @@ $(document).ready(function(){
                         var img = new Image();
                         img.src = dataUrl;
                         $.get("{% url 'dashboard:reports_sales_items_pdf' %}",{image:dataUrl, date:date}, function(data){
-                                  window.open("data:application/pdf," + escape(data));
+                                openPdf(data);
                        });
                     })
                     .catch(function (error) {
@@ -490,7 +493,7 @@ $(document).ready(function(){
                         var img = new Image();
                         img.src = dataUrl;
                         $.get("{% url 'dashboard:reports_sales_items_pdf' %}",{image:dataUrl}, function(data){
-                                  window.open("data:application/pdf," + escape(data));
+                               openPdf(data);
                        });
                     })
                     .catch(function (error) {
@@ -503,7 +506,7 @@ $(document).ready(function(){
                           var img = new Image();    
                           img.src = dataUrl;    
                           $.get("{% url 'dashboard:reports_discount_items_pdf' %}",{image:dataUrl, date:date}, function(data){    
-                                    window.open("data:application/pdf," + escape(data));    
+                               openPdf(data);
                          });    
                       })    
                       .catch(function (error) {   
@@ -516,7 +519,7 @@ $(document).ready(function(){
                           var img = new Image();    
                           img.src = dataUrl;    
                           $.get("{% url 'dashboard:reports_discount_items_pdf' %}",{image:dataUrl}, function(data){   
-                                    window.open("data:application/pdf," + escape(data));    
+                                 openPdf(data);
                          });    
                       })    
                       .catch(function (error) {   
@@ -529,7 +532,7 @@ $(document).ready(function(){
                         var img = new Image();
                         img.src = dataUrl;
                         $.get("{% url 'dashboard:reports_sales_user_pdf' %}",{image:dataUrl, date:date}, function(data){
-                                  window.open("data:application/pdf," + escape(data));
+                                openPdf(data);
                        });
                     })
                     .catch(function (error) {
@@ -542,7 +545,7 @@ $(document).ready(function(){
                         var img = new Image();
                         img.src = dataUrl;
                         $.get("{% url 'dashboard:reports_sales_user_pdf' %}",{image:dataUrl}, function(data){
-                                  window.open("data:application/pdf," + escape(data));
+                               openPdf(data);
                        });
                     })
                     .catch(function (error) {
@@ -555,7 +558,7 @@ $(document).ready(function(){
                         var img = new Image();
                         img.src = dataUrl;
                         $.get("{% url 'dashboard:reports_sales_tills_pdf' %}",{image:dataUrl, date:date}, function(data){
-                                  window.open("data:application/pdf," + escape(data));
+                                openPdf(data);
                        });
                     })
                     .catch(function (error) {
@@ -568,7 +571,7 @@ $(document).ready(function(){
                         var img = new Image();
                         img.src = dataUrl;
                         $.get("{% url 'dashboard:reports_sales_tills_pdf' %}",{image:dataUrl}, function(data){
-                                  window.open("data:application/pdf," + escape(data));
+                               openPdf(data);
                        });
                     })
                     .catch(function (error) {
@@ -576,19 +579,19 @@ $(document).ready(function(){
                     });
             }else if (searchData && date ){
                 $.get(url, {q:searchData, gid:date}, function(data){
-                          window.open("data:application/pdf," + escape(data));
+                          openPdf(data);
                 });
             }else if (searchData){
                 $.get(url, {q:searchData}, function(data){
-                          window.open("data:application/pdf," + escape(data));
+                          openPdf(data);
                 });
             }else if (date){
                 $.get(url, {gid:date}, function(data){
-                          window.open("data:application/pdf," + escape(data));
+                          openPdf(data);
                 });
             }else{
                 $.get(url, function(data){
-                          window.open("data:application/pdf," + escape(data));
+                          openPdf(data);
                });
             }
 
