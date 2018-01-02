@@ -216,6 +216,8 @@
 
 <script type="text/javascript" src="{% static 'backend/js/customer/customer-listing.js' %}"></script>
 <script type="text/javascript" src="{% static 'backend/js/plugins/ui/dom-to-image-master/dom-to-image.min.js' %}"></script>
+<script > var back_path = "{{request.path}}";</script>
+<script type="text/javascript" src="{% static 'backend/js/pdf/open-pdf.js' %}"></script>
 
 <script type="text/javascript">
   var paginateUrl = "{% url 'dashboard:customer-report-paginate' %}";
@@ -340,7 +342,7 @@
             img.src = dataUrl;
             console.log(img.src);
             $.get("{% url 'dashboard:costomer_loyalty_points_pdf' %}",{image:dataUrl}, function(data){
-                      window.open("data:application/pdf," + escape(data));
+                      openPdf(data);
            });
         })
         .catch(function (error) {
