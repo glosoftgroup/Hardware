@@ -263,6 +263,9 @@ class Product(models.Model, ItemRange, index.Indexed):
 
 
 class ProductVariantManager(models.Manager):
+    def get_in_stock(self):
+        today = datetime.date.today()
+        return self.get_queryset().filter(stock__quantity__gte=1)
 
     def get_low_stock(self):
         today = datetime.date.today()
